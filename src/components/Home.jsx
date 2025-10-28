@@ -13,15 +13,12 @@ export default function Home() {
       if (width < 600) {
         setIframeSrc(base + "?fov=105");
       } else if (width < 768) {
-        // Phones — normal
         setIframeSrc(base);
       } else if (width < 1200) {
-        // iPads / small laptops — increase FOV
         setIframeSrc(base + "?fov=85");
       } else if (width < 1400) {
         setIframeSrc(base + "?fov=75");
       } else {
-        // Desktop — default FOV
         setIframeSrc(base);
       }
     };
@@ -30,11 +27,9 @@ export default function Home() {
       setIsPortrait(window.innerHeight > window.innerWidth);
     };
 
-    // Initial setup
     updateSrc();
     handleOrientation();
 
-    // Listeners
     window.addEventListener("resize", updateSrc);
     window.addEventListener("resize", handleOrientation);
     window.addEventListener("orientationchange", handleOrientation);
@@ -49,7 +44,6 @@ export default function Home() {
   return (
     <main className="relative w-full h-screen bg-black overflow-hidden">
       {isPortrait ? (
-        // Overlay message for portrait orientation
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
           <h1 className="text-white text-3xl font-semibold mb-4">
             Rotate Your Device
@@ -59,7 +53,6 @@ export default function Home() {
           </p>
         </div>
       ) : (
-        // Landscape / normal view
         <iframe
           key={iframeSrc}
           src={iframeSrc}
